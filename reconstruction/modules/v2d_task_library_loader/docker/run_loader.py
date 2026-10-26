@@ -24,6 +24,7 @@ def run_loader(
     sequence_name: str | None = None,
     result_subpath: str | None = None,
     no_ground_align: bool = False,
+    source_fps: float | None = None,
     device: str = "cuda:0",
     save: bool = True,
     sequence_pattern: str | None = None,
@@ -49,6 +50,7 @@ def run_loader(
         "sequence_name": sequence_name,
         "result_subpath": result_subpath,
         "no_ground_align": no_ground_align,
+        "source_fps": source_fps,
     }
     if dataset_root is not None:
         human_motion_root = os.path.abspath(human_motion_data_dir)
@@ -112,6 +114,12 @@ if __name__ == "__main__":
         help="Preserve an already gravity-aligned bundle's world rotation.",
     )
     parser.add_argument(
+        "--source_fps",
+        type=float,
+        default=None,
+        help="Override the source clip rate stored in ManoSharpaData.",
+    )
+    parser.add_argument(
         "--object_assets_dir",
         default=None,
         help="Root holding urdfs/<dataset>/ + meshes/<dataset>/ (mounted as one "
@@ -137,6 +145,7 @@ if __name__ == "__main__":
         sequence_name=args.sequence_name,
         result_subpath=args.result_subpath,
         no_ground_align=args.no_ground_align,
+        source_fps=args.source_fps,
         device=args.device,
         save=args.save,
         sequence_pattern=args.sequence_pattern,
