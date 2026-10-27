@@ -275,6 +275,10 @@ def _step(label: str, done: bool) -> bool:
     if done:
         print(f"  [skip] {label}")
         return True
+    # Overlay videos are diagnostic and are not inputs to reconstruction.
+    if os.environ.get("V2D_SKIP_OVERLAYS") == "1" and "overlay" in label.lower():
+        print(f"  [skip] {label} (V2D_SKIP_OVERLAYS=1)")
+        return True
     print(f"  [run ] {label}")
     return False
 
