@@ -463,8 +463,21 @@ class EgoReconDatasetLoader(DatasetLoaderBase):
         return {"flat_hand_mean": True, "center_idx": None}
 
     def get_fps(self) -> float:
-        """Ego clip frame rate (source video is 30 fps)."""
-        return EGO_FPS
+        """Ego clip rate, with an explicit source-rate override.
+
+        The historical loader default is 30 Hz, but Track 3 evaluation videos
+        are 20 Hz. Keep the legacy default for existing datasets while making
+        the production source rate explicit and reproducible at this boundary.
+        """
+        source_fps = getattr(self._args, "source_fps", None)
+        if source_fps is None:
+            return EGO_FPS
+        source_fps = float(source_fps)
+        if not np.isfinite(source_fps) or source_fps <= 0.0:
+            raise ValueError(
+                f"--source_fps must be finite and positive, got {source_fps}"
+            )
+        return source_fps
 
     @staticmethod
     def _mesh_signature(path: Path, scale: float) -> tuple[int, tuple[float, ...]]:
@@ -632,6 +645,15 @@ def parse_args() -> argparse.Namespace:
         help="Extra rotation (degrees) about world +z applied to the aligned scene "
         "(object + hands + support). Use to correct an arbitrary-yaw heading left by "
         "gravity alignment, e.g. -90 to undo a -90 deg offset.",
+    )
+    parser.add_argument(
+        "--source_fps",
+        type=float,
+        default=None,
+        help=(
+            "Override the source clip rate stored in ManoSharpaData. Track 3 "
+            "evaluation videos use 20 Hz; omit for the legacy 30 Hz default."
+        ),
     )
     return parser.parse_args()
 
