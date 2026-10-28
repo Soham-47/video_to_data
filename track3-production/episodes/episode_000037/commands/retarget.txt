@@ -1,0 +1,1 @@
+PYTHONPATH=/workspace/pyarrow14 HUMAN_MOTION_DATA_DIR=/data/human_motion_data /workspace/isaaclab/_isaac_sim/python.sh /workspace/video_to_data/robotic_grounding/scripts/retarget/ego_recon_to_sharpa.py --input_dir /workspace/native/loaded --output_dir /workspace/native/processed --device cuda:0 --save

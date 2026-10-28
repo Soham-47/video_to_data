@@ -1,0 +1,5 @@
+public_url=https://github.com/Soham-47/video_to_data/commit/b24c77fb30771d72d9212698f7f390979cbd229e
+commit=b24c77fb30771d72d9212698f7f390979cbd229e
+source_checkout=/home/ubuntu/workspace/nvidia-v2d/upstream/video_to_data
+framework_files_published_in_existing_repo=reconstruction/modules/v2d_pipelines/run_ego_wilor.py,reconstruction/modules/v2d_task_library_loader/docker/run_loader.py,reconstruction/modules/v2d_task_library_loader/lib/ego_recon_loader.py
+framework_duplicates_in_bundle=false

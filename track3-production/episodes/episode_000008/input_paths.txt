@@ -1,0 +1,3 @@
+/home/ubuntu/workspace/nvidia-v2d/data/raw/video_to_data_challenge/track_3/evaluation/videos/chunk-000/observation.images.ego_cam_a/episode_000008.mp4
+/home/ubuntu/workspace/nvidia-v2d/runs/track3-production/episode_000001_rebuild/white_pot/mesh_scaled.obj
+/home/ubuntu/workspace/nvidia-v2d/runs/track3-production/episode_000010/reconstruction/beige_cup/mesh_scaled.obj
